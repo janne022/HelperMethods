@@ -8,7 +8,7 @@ namespace HelperMethods
 {
     internal static class Menu
     {
-        // Helper method to show alternatives that can be selected with arrow keys and enter
+        // Helper method to show alternatives that can be selected with arrow keys and enter, made to return an Enum
         public static T ReadOption<T>(string questionText, T[] menuOptions) where T : Enum
         {
             int i = 0;
@@ -40,8 +40,8 @@ namespace HelperMethods
                 }
             }
         }
-        // Helper method to show alternatives that can be selected with arrow keys and enter, made for int
-        public static int ReadOption<T>(string questionText, T[] menuOptions)
+        // Helper method to show alternatives that can be selected with arrow keys and enter, made to return int
+        public static int ReadOptionIndex<T>(string questionText, T[] menuOptions)
         {
             int i = 0;
             while (true)
@@ -112,12 +112,12 @@ namespace HelperMethods
                     (bool, string) verifyInput = VerifyString(userInput, minLength, maxLength);
                     if (verifyInput.Item1)
                     {
-                        Console.WriteLine(verifyInput.Item2);
+                        DisplayStatus(verifyInput.Item2, ConsoleColor.Green);
                         return userInput;
                     }
                     else
                     {
-                        Console.WriteLine(verifyInput.Item2);
+                        DisplayStatus(verifyInput.Item2, ConsoleColor.Red);
                     }
                 }
 
@@ -141,11 +141,11 @@ namespace HelperMethods
                     }
                     else if (!success)
                     {
-                        Console.WriteLine("You must provide a real number!");
+                        DisplayStatus("Error: You must provide a real number!", ConsoleColor.Red);
                     }
                     else
                     {
-                        Console.WriteLine("That number is outside of the allowed range");
+                        DisplayStatus("Error: That number is outside of the allowed range", ConsoleColor.Red);
                     }
                 }
             }
@@ -162,6 +162,16 @@ namespace HelperMethods
                 return (false, $"You can maximum enter {maxLength} characters");
             }
             return (true, "Success!");
+        }
+
+        public static void DisplayStatus(string message, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine($"\n{message}");
+            Console.ResetColor();
+            Console.WriteLine("Click any key to continue...");
+            Console.ReadKey();
+
         }
     }
 }
