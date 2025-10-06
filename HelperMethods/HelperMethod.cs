@@ -9,12 +9,13 @@ namespace HelperMethods
     internal static class Menu
     {
         // Helper method to show alternatives that can be selected with arrow keys and enter, made to return an Enum
-        public static T ReadOption<T>(string questionText, T[] menuOptions) where T : Enum
+        public static TEnum ReadOption<T, TEnum>(string questionText, T[] menuOptions) where TEnum : Enum
         {
             int i = 0;
             while (true)
             {
                 Console.Clear();
+                // Write out question and display options, currently selected index gets highlighted
                 Console.WriteLine(questionText + "\n");
                 for (int j = 0; j < menuOptions.Length; j++)
                 {
@@ -24,7 +25,10 @@ namespace HelperMethods
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.ForegroundColor = ConsoleColor.White;
                 }
+                // Reset color and read the key that user presses
+                Console.ResetColor();
                 ConsoleKey key = Console.ReadKey().Key;
+                // Check what user pressed and go up or down in index as long as it is within the length of menuOptions. Enter returns Enum
                 switch (key)
                 {
                     case ConsoleKey.DownArrow:
@@ -35,7 +39,7 @@ namespace HelperMethods
                         break;
                     case ConsoleKey.Enter:
                         // returns specified enum
-                        return (T)Enum.ToObject(typeof(T), i);
+                        return (TEnum)Enum.ToObject(typeof(TEnum), i);
 
                 }
             }
