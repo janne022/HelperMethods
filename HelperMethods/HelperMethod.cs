@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HelperMethods
 {
-    internal static class Menu
+    public static class Menu
     {
         /// <summary>
         /// Displays a menu with options for the user to choose from. They can navigate using arrow keys up and down. Clears console before displaying.
