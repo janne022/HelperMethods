@@ -4,7 +4,8 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            string[] menuOptions = {"First", "Second", "Exit"};
+            MenuOptions options = Menu.ReadOption<string, MenuOptions>("What would you like to do?",menuOptions);
         }
     }
 }

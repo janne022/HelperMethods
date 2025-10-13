@@ -8,7 +8,14 @@ namespace HelperMethods
 {
     internal static class Menu
     {
-        // Helper method to show alternatives that can be selected with arrow keys and enter, made to return an Enum
+        /// <summary>
+        /// Displays a menu with options for the user to choose from. They can navigate using arrow keys up and down. Clears console before displaying.
+        /// </summary>
+        /// <typeparam name="T">An array that is going to be displayed as strings</typeparam>
+        /// <typeparam name="TEnum">An enum that represents options in menu, where each index is an option</typeparam>
+        /// <param name="questionText">A string displayed at the top of the menu</param>
+        /// <param name="menuOptions">Options in an array that is displayed to the user</param>
+        /// <returns>Returns an Enum with chosen enum index</returns>
         public static TEnum ReadOption<T, TEnum>(string questionText, T[] menuOptions) where TEnum : Enum
         {
             int i = 0;
